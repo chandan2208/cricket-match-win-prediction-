@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script>
+        (function () {
+            try {
+                var savedTheme = localStorage.getItem('cricpredic_theme') || 'test';
+                if (savedTheme === 'ipl') {
+                    document.documentElement.setAttribute('data-theme', 'ipl');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                }
+            } catch (e) {
+                document.documentElement.removeAttribute('data-theme');
+            }
+        })();
+    </script>
+<title>MatchPredictor - History</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="../css/theme-system.css" rel="stylesheet"/>
+<link href="../css/responsive-system.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "error-container": "#93000a",
+                            "tertiary": "#ffecad",
+                            "on-surface": "#e2e1ee",
+                            "primary-fixed-dim": "#00daf3",
+                            "primary": "#c3f5ff",
+                            "on-surface-variant": "#bac9cc",
+                            "error": "#ffb4ab",
+                            "secondary-container": "#6f00be",
+                            "on-primary-fixed-variant": "#004f58",
+                            "inverse-primary": "#006875",
+                            "surface-container-high": "#282a32",
+                            "background": "#11131b",
+                            "on-background": "#e2e1ee",
+                            "surface-dim": "#11131b",
+                            "surface-container": "#1d1f28",
+                            "inverse-on-surface": "#2e3039",
+                            "surface-tint": "#00daf3",
+                            "surface-container-low": "#191b24",
+                            "on-primary": "#00363d",
+                            "primary-fixed": "#9cf0ff",
+                            "on-error": "#690005",
+                            "on-secondary": "#490080",
+                            "on-tertiary-fixed-variant": "#544600",
+                            "tertiary-fixed-dim": "#e9c400",
+                            "surface-container-highest": "#33343e",
+                            "outline": "#849396",
+                            "on-tertiary": "#3a3000",
+                            "tertiary-fixed": "#ffe16d",
+                            "on-tertiary-fixed": "#221b00",
+                            "surface": "#11131b",
+                            "secondary": "#ddb7ff",
+                            "tertiary-container": "#f4ce00",
+                            "on-error-container": "#ffdad6",
+                            "on-secondary-fixed-variant": "#6900b3",
+                            "secondary-fixed": "#f0dbff",
+                            "secondary-fixed-dim": "#ddb7ff",
+                            "inverse-surface": "#e2e1ee",
+                            "on-secondary-container": "#d6a9ff",
+                            "surface-container-lowest": "#0c0e16",
+                            "on-tertiary-container": "#695800",
+                            "on-secondary-fixed": "#2c0051",
+                            "surface-bright": "#373942",
+                            "surface-variant": "#33343e",
+                            "primary-container": "#00e5ff",
+                            "outline-variant": "#3b494c",
+                            "on-primary-fixed": "#001f24",
+                            "on-primary-container": "#00626e"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.125rem",
+                            "lg": "0.25rem",
+                            "xl": "0.5rem",
+                            "full": "0.75rem"
+                    },
+                    "spacing": {
+                            "density": "tight",
+                            "margin": "24px",
+                            "gutter": "16px",
+                            "container-max": "1440px",
+                            "unit": "4px"
+                    },
+                    "fontFamily": {
+                            "body-lg": ["Lexend"],
+                            "body-md": ["Lexend"],
+                            "headline-xl": ["Space Grotesk"],
+                            "headline-md": ["Space Grotesk"],
+                            "label-sm": ["Lexend"],
+                            "data-mono": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                            "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                            "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                            "headline-md": ["24px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                            "label-sm": ["12px", {"lineHeight": "1", "fontWeight": "600"}],
+                            "data-mono": ["16px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background-color: rgba(29, 31, 40, 0.5); /* surface-container approx */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .neon-glow-primary {
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+        }
+        .neon-glow-error {
+            box-shadow: 0 0 15px rgba(255, 180, 171, 0.4);
+        }
+        .neon-progress-head {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 8px;
+            background: white;
+            filter: blur(2px);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-cyan-950/40 backdrop-blur-xl font-space-grotesk tracking-tight docked full-width top-0 border-b border-white/10 shadow-[0_0_20px_rgba(0,229,255,0.15)] fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">MatchPredictor</span>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search on right -->
+<div class="hidden md:flex items-center bg-surface-container-high/50 rounded-full px-4 py-2 border border-white/5 focus-within:border-primary-container/50 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-surface placeholder-on-surface-variant/50 w-48 outline-none" placeholder="Search teams or dates..." type="text"/>
+</div>
+<!-- Trailing Icons -->
+<div class="flex items-center gap-4 text-cyan-400">
+<button class="hover:text-cyan-300 transition-colors opacity-80 hover:opacity-100 hover:scale-110 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:text-cyan-300 transition-colors opacity-80 hover:opacity-100 hover:scale-110 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col bg-slate-950/60 backdrop-blur-2xl font-space-grotesk text-sm font-bold uppercase tracking-widest docked left-0 h-full w-64 border-r border-r border-white/10 shadow-[10px_0_30px_rgba(0,0,0,0.5)] fixed left-0 top-16 h-[calc(100vh-64px)] z-40 py-8">
+<!-- Header Info -->
+<div class="px-6 mb-8 flex flex-col gap-2">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-container/30 mb-2">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="professional headshot of a sports analyst with headset in dramatic studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1ggLzqinCj2Ahk_CfkMpgrl9g-oHm-TDzMVt2DHwQqMXE_MTUVMpL9DQRPJLnsxUW_B2S4p4e3_LXlmPgMlBMN2OVx8LqjCgixUP7NZjjU2zWkmE3UB6aI8D6LoNi3QREoH0gvvkxgcw4T11FZPSLy9ts-R2TFjW9Gs_PL4CB-HTK4eKdR2YZc78VLZHpgCxEZ3zps4tiCgBtVPSq1e6UTuXanTaB1wcLrFdeKyJLUVrBOqg8dGrK9Q4T64c9S399abUxCjOYXrBf"/>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface">Pro Analyst</div>
+<div class="font-label-sm text-label-sm text-primary">Premium Tier</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 flex flex-col gap-2 px-4">
+<!-- Inactive -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+<span>Predict</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Analytics</span>
+</a>
+<!-- Active Tab: History -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg bg-cyan-500/10 text-cyan-400 border-r-4 border-cyan-400 shadow-[inset_0_0_15px_rgba(0,229,255,0.2)] translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="history" data-weight="fill" style="font-variation-settings: 'FILL' 1;">history</span>
+<span>History</span>
+</a>
+</div>
+<!-- CTA & Footer -->
+<div class="px-6 mt-auto flex flex-col gap-4">
+<button class="w-full py-3 rounded-xl bg-gradient-to-r from-primary-container to-blue-600 text-on-primary-container font-headline-md text-body-md font-bold hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] transition-all uppercase tracking-wider relative overflow-hidden group">
+<span class="relative z-10">Upgrade to VIP</span>
+<div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+</button>
+<div class="flex flex-col gap-2 mt-4 border-t border-white/5 pt-4">
+<a class="flex items-center gap-4 text-slate-500 hover:text-slate-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+<a class="flex items-center gap-4 text-slate-500 hover:text-slate-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="help">help</span>
+<span class="font-label-sm text-label-sm">Support</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 mt-16 p-margin min-h-[calc(100vh-64px)] relative">
+<!-- Decorative Background Elements -->
+<div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+<div class="absolute bottom-1/4 right-0 w-[400px] h-[400px] bg-secondary-container/10 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+<div class="max-w-container-max mx-auto space-y-margin">
+<!-- Page Header -->
+<div class="flex flex-col gap-2">
+<h1 class="font-headline-xl text-headline-xl text-on-surface">Prediction History</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Review past performance, analyze accuracy metrics, and refine your predictive models based on historical cricket match outcomes.</p>
+</div>
+<!-- Summary Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Stat Card 1 -->
+<div class="glass-panel rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary-container opacity-50 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Total Predictions</span>
+<span class="material-symbols-outlined text-primary-container/50" data-icon="monitoring">monitoring</span>
+</div>
+<div class="font-headline-xl text-headline-xl text-on-surface">1,248</div>
+<div class="mt-2 flex items-center gap-1 text-primary text-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="trending_up">trending_up</span>
+<span class="font-body-md text-body-md">+12% this month</span>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="glass-panel rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary opacity-50 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Overall Accuracy</span>
+<span class="material-symbols-outlined text-secondary/50" data-icon="radar">radar</span>
+</div>
+<div class="font-headline-xl text-headline-xl text-on-surface">76.4<span class="text-2xl text-on-surface-variant">%</span></div>
+<div class="mt-2 w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[76.4%] relative neon-glow-primary shadow-secondary"></div>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="glass-panel rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-tertiary opacity-50 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Current Streak</span>
+<span class="material-symbols-outlined text-tertiary/50" data-icon="local_fire_department">local_fire_department</span>
+</div>
+<div class="font-headline-xl text-headline-xl text-on-surface">5 <span class="text-2xl text-on-surface-variant font-body-md">Matches</span></div>
+<div class="mt-2 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-tertiary animate-pulse shadow-[0_0_8px_theme(colors.tertiary)]"></div>
+<span class="font-body-md text-body-md text-tertiary">Active streak</span>
+</div>
+</div>
+</div>
+<!-- Main Data Table Container -->
+<div class="glass-panel rounded-xl overflow-hidden flex flex-col">
+<!-- Table Header Area -->
+<div class="p-6 border-b border-white/5 flex justify-between items-center bg-surface-container-low/30">
+<h2 class="font-headline-md text-headline-md text-on-surface">Match Log</h2>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-white/5 hover:text-on-surface transition-colors font-label-sm text-label-sm uppercase tracking-wider">
+<span class="material-symbols-outlined text-[18px]" data-icon="filter_list">filter_list</span>
+                        Filter
+                    </button>
+</div>
+<!-- Data Grid (Table Alternative) -->
+<div class="w-full overflow-x-auto">
+<div class="min-w-[900px] w-full">
+<!-- Header Row -->
+<div class="grid grid-cols-12 gap-4 px-6 py-4 border-b border-white/5 bg-surface-container-highest/20 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">
+<div class="col-span-2">Match Date</div>
+<div class="col-span-3">Teams</div>
+<div class="col-span-2">Predicted Outcome</div>
+<div class="col-span-2">Actual Result</div>
+<div class="col-span-3 text-right">Confidence &amp; Accuracy</div>
+</div>
+<!-- Rows Wrapper -->
+<div class="flex flex-col">
+<!-- Row 1: Correct -->
+<div class="grid grid-cols-12 gap-4 px-6 py-5 border-b border-white/5 hover:bg-surface-container-high/40 transition-colors items-center group relative">
+<div class="absolute left-0 top-0 bottom-0 w-[2px] bg-primary opacity-0 group-hover:opacity-100 transition-opacity neon-glow-primary"></div>
+<div class="col-span-2 font-data-mono text-data-mono text-on-surface-variant">
+<div class="text-on-surface">Oct 24, 2023</div>
+<div class="text-sm opacity-60">14:00 GMT</div>
+</div>
+<div class="col-span-3 flex flex-col gap-1 font-body-md text-body-md">
+<div class="flex items-center gap-2 text-on-surface">
+<div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div> IND
+                                    </div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<div class="w-1.5 h-1.5 rounded-full bg-green-500"></div> PAK
+                                    </div>
+</div>
+<div class="col-span-2">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-container border border-outline-variant/30 text-on-surface font-body-md text-body-md">
+                                        IND Win
+                                    </span>
+</div>
+<div class="col-span-2">
+<span class="font-body-md text-body-md text-on-surface">IND Win by 7 wkts</span>
+</div>
+<div class="col-span-3 flex flex-col items-end gap-2">
+<div class="flex items-center gap-3 w-full justify-end">
+<span class="font-data-mono text-data-mono text-on-surface text-sm">88%</span>
+<div class="w-24 h-1.5 bg-surface-container-highest rounded-full overflow-hidden relative">
+<div class="absolute left-0 top-0 bottom-0 w-[88%] bg-primary rounded-full neon-glow-primary">
+<div class="neon-progress-head"></div>
+</div>
+</div>
+</div>
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-bold uppercase tracking-wider bg-primary/10 text-primary border border-primary/30 shadow-[0_0_10px_rgba(0,229,255,0.2)]">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle">check_circle</span>
+                                        Correct
+                                    </div>
+</div>
+</div>
+<!-- Row 2: Incorrect -->
+<div class="grid grid-cols-12 gap-4 px-6 py-5 border-b border-white/5 hover:bg-surface-container-high/40 transition-colors items-center group relative">
+<div class="absolute left-0 top-0 bottom-0 w-[2px] bg-error opacity-0 group-hover:opacity-100 transition-opacity neon-glow-error"></div>
+<div class="col-span-2 font-data-mono text-data-mono text-on-surface-variant">
+<div class="text-on-surface">Oct 21, 2023</div>
+<div class="text-sm opacity-60">08:30 GMT</div>
+</div>
+<div class="col-span-3 flex flex-col gap-1 font-body-md text-body-md">
+<div class="flex items-center gap-2 text-on-surface">
+<div class="w-1.5 h-1.5 rounded-full bg-yellow-500"></div> AUS
+                                    </div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<div class="w-1.5 h-1.5 rounded-full bg-red-600"></div> ENG
+                                    </div>
+</div>
+<div class="col-span-2">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-container border border-outline-variant/30 text-on-surface font-body-md text-body-md">
+                                        ENG Win
+                                    </span>
+</div>
+<div class="col-span-2">
+<span class="font-body-md text-body-md text-on-surface">AUS Win by 33 runs</span>
+</div>
+<div class="col-span-3 flex flex-col items-end gap-2">
+<div class="flex items-center gap-3 w-full justify-end">
+<span class="font-data-mono text-data-mono text-on-surface text-sm">62%</span>
+<div class="w-24 h-1.5 bg-surface-container-highest rounded-full overflow-hidden relative">
+<div class="absolute left-0 top-0 bottom-0 w-[62%] bg-surface-tint rounded-full opacity-60"></div>
+</div>
+</div>
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-bold uppercase tracking-wider bg-error-container/20 text-error border border-error/30 shadow-[0_0_10px_rgba(255,180,171,0.2)]">
+<span class="material-symbols-outlined text-[14px]" data-icon="cancel">cancel</span>
+                                        Incorrect
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script src="../js/theme-system.js"></script>
+<script src="../js/responsive-nav.js"></script>
+<script type="module" src="../js/ui-integration.js"></script>
+</body></html>

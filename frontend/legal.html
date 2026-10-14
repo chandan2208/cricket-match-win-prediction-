@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <script>
+        (function () {
+            try {
+                var savedTheme = localStorage.getItem('cricpredic_theme') || 'test';
+                if (savedTheme === 'ipl') {
+                    document.documentElement.setAttribute('data-theme', 'ipl');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                }
+            } catch (e) {
+                document.documentElement.removeAttribute('data-theme');
+            }
+        })();
+    </script>
+    <title>CricPredic - Legal & Methodology</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="./css/theme-system.css" rel="stylesheet"/>
+    <link href="./css/responsive-system.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-background min-h-screen antialiased overflow-x-hidden">
+    <header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-cyan-950/40 backdrop-blur-xl border-b border-white/10 shadow-[0_0_20px_rgba(0,229,255,0.15)] font-space-grotesk tracking-tight">
+        <div class="flex items-center gap-4">
+            <div class="text-2xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">CricPredic</div>
+        </div>
+        <div class="flex items-center gap-4 text-cyan-400">
+            <a href="index.html" class="flex items-center gap-2 hover:text-cyan-300 transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span> Back to App
+            </a>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-20 px-6 max-w-3xl mx-auto flex flex-col gap-12">
+        <section class="space-y-6">
+            <h1 class="font-headline-xl text-headline-xl text-on-surface">Methodology</h1>
+            <p class="font-body-lg text-on-surface-variant leading-relaxed">
+                CricPredic utilizes advanced machine learning architectures to synthesize match probabilities. Our engine analyzes over 50,000 historical T20 and ODI fixtures, incorporating real-time environmental data including:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-on-surface-variant font-body-md pl-4">
+                <li>Pitch surface friction and moisture levels</li>
+                <li>Atmospheric pressure and humidity interaction</li>
+                <li>Team archetype tactical advantages (Spin/Pace/Swing)</li>
+                <li>Player-specific head-to-head performance vectors</li>
+            </ul>
+        </section>
+
+        <section class="space-y-6">
+            <h2 class="font-headline-md text-headline-md text-on-surface">Privacy Policy</h2>
+            <p class="font-body-md text-on-surface-variant leading-relaxed">
+                CricPredic is a privacy-first platform. We do not sell user data. All prediction history is stored securely to enhance your analytical experience. We use localStorage to preserve your visual theme preferences (Test vs. IPL) locally on your device.
+            </p>
+        </section>
+
+        <section class="space-y-6">
+            <h2 class="font-headline-md text-headline-md text-on-surface">Archives</h2>
+            <p class="font-body-md text-on-surface-variant leading-relaxed">
+                The CricPredic Archive contains match data spanning the last decade of international cricket. Premium users can access detailed heatmaps and ball-by-ball analysis via the VIP tier.
+            </p>
+        </section>
+
+        <div class="pt-8 border-t border-white/10">
+            <a href="index.html" class="inline-flex items-center gap-3 px-6 py-3 rounded bg-primary-container text-on-primary-container font-bold hover:shadow-[0_0_15px_rgba(0,229,255,0.4)] transition-all">
+                <span class="material-symbols-outlined">home</span> Returning to Dashboard
+            </a>
+        </div>
+    </main>
+
+    <footer class="py-8 px-6 bg-slate-950/60 border-t border-white/10 mt-auto backdrop-blur-2xl">
+        <div class="max-w-container-max mx-auto flex flex-col items-center gap-4">
+            <div class="text-xl font-bold text-cyan-400 italic">CricPredic</div>
+            <p class="text-slate-500 text-sm">© 2026 CricPredic. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="./js/theme-system.js"></script>
+</body>
+</html>

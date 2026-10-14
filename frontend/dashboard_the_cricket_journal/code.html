@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script>
+                        (function () {
+                                try {
+                                        var savedTheme = localStorage.getItem('cricpredic_theme') || 'test';
+                                        if (savedTheme === 'ipl') {
+                                                document.documentElement.setAttribute('data-theme', 'ipl');
+                                        } else {
+                                                document.documentElement.removeAttribute('data-theme');
+                                        }
+                                } catch (e) {
+                                        document.documentElement.removeAttribute('data-theme');
+                                }
+                        })();
+                </script>
+<title>The Cricket Journal - Match Overview</title>
+<!-- Google Fonts -->
+<link href="../css/theme-system.css" rel="stylesheet"/>
+<link href="../css/responsive-system.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#2f312f",
+                    "tertiary-fixed-dim": "#eac243",
+                    "secondary-fixed": "#e4e4cc",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#ffe089",
+                    "on-surface-variant": "#414943",
+                    "on-secondary-fixed-variant": "#474836",
+                    "surface-bright": "#faf9f6",
+                    "inverse-primary": "#a2d1b7",
+                    "on-primary": "#ffffff",
+                    "primary": "#001b0f",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#c1c8c2",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#574500",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#faf9f6",
+                    "secondary-container": "#e1e1c9",
+                    "surface-dim": "#dbdad7",
+                    "on-tertiary-fixed": "#241a00",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#013220",
+                    "primary-fixed-dim": "#a2d1b7",
+                    "on-primary-fixed": "#002113",
+                    "surface-container": "#efeeeb",
+                    "inverse-on-surface": "#f2f1ee",
+                    "on-tertiary-container": "#4e3d00",
+                    "surface-container-high": "#e9e8e5",
+                    "on-secondary-container": "#636451",
+                    "on-primary-container": "#6f9c84",
+                    "tertiary-container": "#cda729",
+                    "on-primary-fixed-variant": "#234f3b",
+                    "tertiary": "#745b00",
+                    "secondary-fixed-dim": "#c8c8b0",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed": "#1b1d0e",
+                    "background": "#faf9f6",
+                    "surface-tint": "#3b6751",
+                    "surface-variant": "#e3e2e0",
+                    "on-background": "#1a1c1a",
+                    "primary-fixed": "#bdedd2",
+                    "outline": "#717973",
+                    "on-surface": "#1a1c1a",
+                    "surface-container-low": "#f4f3f1",
+                    "secondary": "#5e604d",
+                    "surface-container-highest": "#e3e2e0",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "section-gap": "80px",
+                    "margin-mobile": "16px",
+                    "base": "8px",
+                    "margin-desktop": "40px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "headline-sm": [
+                            "notoSerif"
+                    ],
+                    "display-lg": [
+                            "notoSerif"
+                    ],
+                    "body-lg": [
+                            "inter"
+                    ],
+                    "headline-md": [
+                            "notoSerif"
+                    ],
+                    "label-caps": [
+                            "inter"
+                    ],
+                    "body-md": [
+                            "inter"
+                    ]
+            },
+            "fontSize": {
+                    "headline-sm": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.3",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "1.1",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-md": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-caps": [
+                            "12px",
+                            {
+                                    "lineHeight": "1.0",
+                                    "letterSpacing": "0.1em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.5",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+        },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased selection:bg-primary-container selection:text-on-primary">
+<!-- Shared Component: TopNavBar -->
+<nav class="sticky bg-[#FAF9F6] dark:bg-stone-950 docked full-width top-0 border-b border-b border-[#013220]/10 dark:border-emerald-900/30 z-50">
+<div class="max-w-[1280px] mx-auto flex justify-between items-center px-8 h-20 w-full">
+<!-- Brand Logo -->
+<a class="text-2xl font-serif italic text-[#013220] dark:text-emerald-500 hover:opacity-80 transition-opacity" href="#">
+                The Cricket Journal
+            </a>
+<!-- Navigation Links (Web) -->
+<div class="hidden md:flex items-center gap-8 font-serif uppercase tracking-widest text-xs font-bold text-[#013220] dark:text-emerald-500">
+<a class="text-[#013220] dark:text-emerald-400 border-b-2 border-[#013220] dark:border-emerald-400 pb-1 hover:opacity-80 transition-opacity" href="#">Match Analytics</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-[#013220] transition-colors hover:opacity-80 transition-opacity" href="#">Predictions</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-[#013220] transition-colors hover:opacity-80 transition-opacity" href="#">History</a>
+</div>
+<!-- Trailing Icons / Search Placeholder -->
+<div class="flex items-center gap-4 text-[#013220] dark:text-emerald-500">
+<button class="hover:opacity-80 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="hover:opacity-80 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="max-w-container-max mx-auto px-gutter py-margin-desktop md:py-section-gap flex flex-col gap-section-gap">
+<!-- Match Header / Hero -->
+<header class="flex flex-col gap-margin-mobile border-b border-outline-variant/30 pb-margin-desktop">
+<div class="flex flex-wrap items-center gap-x-base gap-y-2 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">location_on</span> Lord's Cricket Ground</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">cloud</span> Overcast</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>Pitch: Green Top</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-primary-container max-w-4xl">
+                India vs Australia: The Battle at Lord's
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl mt-4">
+                An editorial dissection of the opening session. With heavy cloud cover and a pitch carrying a verdant tinge, the decision at the toss holds disproportionate weight in shaping the narrative of this historic clash.
+            </p>
+</header>
+<!-- Win Probability Data Vis -->
+<section class="flex flex-col gap-base max-w-4xl">
+<div class="flex justify-between items-end">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Current Win Probability</h2>
+<span class="font-label-caps text-label-caps text-outline">Updated: Overs 12.4</span>
+</div>
+<div class="w-full h-10 flex rounded-DEFAULT overflow-hidden border border-outline-variant/20 shadow-sm relative group cursor-crosshair">
+<!-- India Bar -->
+<div class="bg-primary-container h-full flex items-center px-4 font-label-caps text-label-caps text-on-primary transition-all duration-700 ease-in-out" style="width: 45%;">
+<span>IND 45%</span>
+</div>
+<!-- Australia Bar -->
+<div class="bg-secondary-container h-full flex items-center justify-end px-4 font-label-caps text-label-caps text-primary-container transition-all duration-700 ease-in-out" style="width: 55%;">
+<span>AUS 55%</span>
+</div>
+<!-- Center Line Indicator -->
+<div class="absolute left-1/2 top-0 bottom-0 w-[1px] bg-outline-variant/50 z-10"></div>
+</div>
+</section>
+<!-- Editorial Content & Sidebars (Asymmetric Layout) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter lg:gap-margin-desktop items-start">
+<!-- Main Column (Insights) -->
+<article class="lg:col-span-8 flex flex-col gap-margin-desktop">
+<div class="w-full aspect-[21/9] bg-surface-container-high overflow-hidden rounded-DEFAULT border border-outline-variant/20">
+<img alt="Stadium view" class="w-full h-full object-cover grayscale opacity-90" data-alt="Monochrome, high-contrast wide shot of an empty cricket stadium looking towards the pavilion, moody and atmospheric, editorial style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAebbe061ps0mr1jWpgHzEX4jyxkhYU7Pk8_NPo9AStUH2OzHDaoK6xj5F-RUkBehfiQGqkrW52eDdTzsjIwNIRB4vuj9WjIOatuyoYo-LVDpBK8A4I8skAckRiEumiRQm0TzQ0wmiJ8gfX7YqaW7bt5avqSIOp6GxpN59IIpxOA_RjNwXH4uAKlixA_GB0ESREW9K998ER48Fe5U4bdA7kUm90mR4abXKqHcY3c3QnA_Yc5cqnxSL4E9cfGpJ6iw44ILVA-87rEYhx"/>
+</div>
+<div class="flex flex-col gap-base">
+<h2 class="font-headline-md text-headline-md text-primary-container">Editorial Insights: The Moving Ball</h2>
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed">
+                        The opening spell demonstrated exactly why conditions at this venue command such reverence. The lateral movement generated off the seam during the first hour effectively reduced the top order to a game of mere survival. Analysing the pitch map reveals a concentrated cluster of deliveries precisely in the corridor of uncertainty, exploiting the subtle slope to devastating effect.
+                    </p>
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed mt-4">
+                        Australia's disciplined channel bowling, persisting with a length that forces the batter forward while allowing enough time for late deviation, has stifled scoring rates. India's defensive technique, whilst largely sound, is being continuously interrogated. The leaves outside off-stump must remain decisive; any wavering in judgment here is met with severe consequences.
+                    </p>
+</div>
+<!-- Data Table Pullout -->
+<div class="border-y border-outline-variant/30 py-margin-mobile my-margin-mobile flex flex-col gap-base">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Key Metrics: First Hour</h3>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/20">
+<th class="py-2 font-label-caps text-label-caps text-on-surface-variant font-normal">Metric</th>
+<th class="py-2 font-label-caps text-label-caps text-on-surface-variant font-normal">India</th>
+<th class="py-2 font-label-caps text-label-caps text-on-surface-variant font-normal">Australia</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface">
+<tr class="border-b border-outline-variant/10">
+<td class="py-3">False Shot Percentage</td>
+<td class="py-3">22%</td>
+<td class="py-3">--</td>
+</tr>
+<tr class="border-b border-outline-variant/10">
+<td class="py-3">Average Swing (Degrees)</td>
+<td class="py-3">--</td>
+<td class="py-3">1.8°</td>
+</tr>
+<tr>
+<td class="py-3">Control Percentage</td>
+<td class="py-3">78%</td>
+<td class="py-3">--</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</article>
+<!-- Secondary Column (Cards) -->
+<aside class="lg:col-span-4 flex flex-col gap-margin-mobile">
+<!-- Card: Weather Impact -->
+<div class="bg-surface-container-low border border-outline-variant/20 p-6 rounded-DEFAULT flex flex-col gap-4 shadow-sm">
+<div class="flex items-center gap-3 border-b border-outline-variant/20 pb-3">
+<span class="material-symbols-outlined text-primary-container">thermostat</span>
+<h3 class="font-headline-sm text-headline-sm text-primary-container">Weather Impact</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        The heavy cloud cover refuses to lift, sustaining the ambient moisture that facilitates pronounced conventional swing. Prognostics suggest these overcast conditions will persist through the second session, meaning the fielding captain can afford to maintain attacking fields for longer than usual.
+                    </p>
+<div class="mt-2 inline-flex items-center gap-2 font-label-caps text-label-caps text-primary-container cursor-pointer hover:opacity-70 transition-opacity">
+<span>VIEW RADAR</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Card: Toss Strategy -->
+<div class="bg-surface-container-low border border-outline-variant/20 p-6 rounded-DEFAULT flex flex-col gap-4 shadow-sm">
+<div class="flex items-center gap-3 border-b border-outline-variant/20 pb-3">
+<span class="material-symbols-outlined text-primary-container">toll</span>
+<h3 class="font-headline-sm text-headline-sm text-primary-container">Toss Strategy</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Electing to bowl first was a mathematically sound decision given the visible 'green top'. Historical data at this venue under similar meteorological constraints indicates a 68% win probability for the team bowling first, assuming they restrict the opposition to under 250 in the first innings.
+                    </p>
+</div>
+</aside>
+</div>
+</main>
+<!-- Shared Component: Footer -->
+<footer class="bg-[#F5F5DC] dark:bg-stone-900 full-width py-20 mt-20 border-t border-[#013220]/10">
+<div class="max-w-[1280px] mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center font-serif text-sm italic text-[#013220] dark:text-emerald-500">
+<div class="flex flex-col gap-4">
+<span class="font-serif font-bold text-[#013220]">The Cricket Journal</span>
+<span class="text-stone-600 dark:text-stone-400">© 2024 The Cricket Journal. Editorial Excellence in Sports Analytics.</span>
+</div>
+<div class="flex flex-wrap items-center md:justify-end gap-6">
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#013220] dark:hover:text-emerald-300 transition-colors" href="#">Archives</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#013220] dark:hover:text-emerald-300 transition-colors" href="#">Methodology</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#013220] dark:hover:text-emerald-300 transition-colors" href="#">Privacy Policy</a>
+<a class="text-stone-600 dark:text-stone-400 hover:text-[#013220] dark:hover:text-emerald-300 transition-colors" href="#">Contact</a>
+</div>
+</div>
+</footer>
+<script src="../js/theme-system.js"></script>
+<script src="../js/responsive-nav.js"></script>
+<script type="module" src="../js/ui-integration.js"></script>
+</body></html>

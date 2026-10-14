@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script>
+  try {
+    const theme = localStorage.getItem("cricpredic_theme");
+    if (theme === "ipl") document.documentElement.setAttribute("data-theme", "ipl");
+  } catch(e) {}
+</script>
+<title>The Cricket Journal - Predictive Analytics</title>
+<!-- Google Fonts -->
+<link href="../css/theme-system.css" rel="stylesheet"/>
+<link href="../css/responsive-system.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Noto+Serif:ital,wght@0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#2f312f",
+                    "tertiary-fixed-dim": "#eac243",
+                    "secondary-fixed": "#e4e4cc",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#ffe089",
+                    "on-surface-variant": "#414943",
+                    "on-secondary-fixed-variant": "#474836",
+                    "surface-bright": "#faf9f6",
+                    "inverse-primary": "#a2d1b7",
+                    "on-primary": "#ffffff",
+                    "primary": "#001b0f",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#c1c8c2",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#574500",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#faf9f6",
+                    "secondary-container": "#e1e1c9",
+                    "surface-dim": "#dbdad7",
+                    "on-tertiary-fixed": "#241a00",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#013220",
+                    "primary-fixed-dim": "#a2d1b7",
+                    "on-primary-fixed": "#002113",
+                    "surface-container": "#efeeeb",
+                    "inverse-on-surface": "#f2f1ee",
+                    "on-tertiary-container": "#4e3d00",
+                    "surface-container-high": "#e9e8e5",
+                    "on-secondary-container": "#636451",
+                    "on-primary-container": "#6f9c84",
+                    "tertiary-container": "#cda729",
+                    "on-primary-fixed-variant": "#234f3b",
+                    "tertiary": "#745b00",
+                    "secondary-fixed-dim": "#c8c8b0",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed": "#1b1d0e",
+                    "background": "#faf9f6",
+                    "surface-tint": "#3b6751",
+                    "surface-variant": "#e3e2e0",
+                    "on-background": "#1a1c1a",
+                    "primary-fixed": "#bdedd2",
+                    "outline": "#717973",
+                    "on-surface": "#1a1c1a",
+                    "surface-container-low": "#f4f3f1",
+                    "secondary": "#5e604d",
+                    "surface-container-highest": "#e3e2e0",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "section-gap": "80px",
+                    "margin-mobile": "16px",
+                    "base": "8px",
+                    "margin-desktop": "40px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Noto Serif"],
+                    "display-lg": ["Noto Serif"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Noto Serif"],
+                    "label-caps": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Custom range slider styling for minimal editorial look */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #001b0f; /* primary */
+            cursor: pointer;
+            margin-top: -7px;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 2px;
+            cursor: pointer;
+            background: #c1c8c2; /* outline-variant */
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-[#FAF9F6] dark:bg-stone-950 docked full-width top-0 border-b border-b border-[#013220]/10 dark:border-emerald-900/30 flat no shadows sticky z-50">
+<div class="max-w-[1280px] mx-auto flex justify-between items-center px-8 h-20 w-full">
+<div class="text-2xl font-serif italic text-[#013220] dark:text-emerald-500">
+                The Cricket Journal
+            </div>
+<nav class="hidden md:flex space-x-8 items-center h-full">
+<a class="font-serif uppercase tracking-widest text-xs font-bold text-stone-500 dark:text-stone-400 hover:text-[#013220] transition-colors h-full flex items-center hover:opacity-80 transition-opacity" href="#">Match Analytics</a>
+<a class="font-serif uppercase tracking-widest text-xs font-bold text-[#013220] dark:text-emerald-400 border-b-2 border-[#013220] dark:border-emerald-400 pb-1 h-full flex items-center hover:opacity-80 transition-opacity Active: opacity-70 transition-all duration-200 mt-1" href="#">Predictions</a>
+<a class="font-serif uppercase tracking-widest text-xs font-bold text-stone-500 dark:text-stone-400 hover:text-[#013220] transition-colors h-full flex items-center hover:opacity-80 transition-opacity" href="#">History</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button class="text-[#013220] dark:text-emerald-500 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap">
+<!-- Page Title Header -->
+<header class="mb-gutter md:mb-section-gap text-center max-w-3xl mx-auto">
+<p class="font-label-caps text-label-caps text-primary-container mb-4 uppercase tracking-widest">Scenario Modeling</p>
+<h1 class="font-display-lg text-display-lg text-primary mb-6">Predictive Analytics Engine</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Adjust the environmental parameters and structural integrity of the competing sides to generate a synthesized probability index.</p>
+</header>
+<!-- Editorial Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Input Form (The 'Editor') -->
+<div class="lg:col-span-5 bg-surface-container-low border border-outline-variant rounded p-6 md:p-8">
+<h2 class="font-headline-sm text-headline-sm text-primary mb-8 border-b border-outline-variant pb-4">Match Conditions</h2>
+<form class="space-y-8">
+<!-- Pitch Selector -->
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface mb-3">Pitch Condition</label>
+<div class="grid grid-cols-3 gap-3">
+<button type="button" class="option-btn font-body-md text-body-md" data-group="pitch_condition" data-value="neutral">Neutral</button>
+<button type="button" class="option-btn font-body-md text-body-md" data-group="pitch_condition" data-value="pace-friendly">Pace-friendly</button>
+<button type="button" class="option-btn font-body-md text-body-md" data-group="pitch_condition" data-value="spin-friendly">Spin-friendly</button>
+</div>
+</div>
+<!-- Weather Selector -->
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface mb-3">Atmosphere</label>
+<div class="grid grid-cols-3 gap-3">
+<button type="button" class="option-btn font-body-md text-body-md" data-group="weather" data-value="sunny">Sunny</button>
+<button type="button" class="option-btn font-body-md text-body-md" data-group="weather" data-value="overcast">Overcast</button>
+<button type="button" class="option-btn font-body-md text-body-md" data-group="weather" data-value="humid">Humid</button>
+</div>
+</div>
+<hr class="border-outline-variant opacity-50"/>
+<!-- Team Dropdowns -->
+<div class="space-y-6">
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface mb-3">Team A (Home)</label>
+<select id="teamASelect" class="w-full bg-surface-container border border-outline-variant rounded p-3 font-body-md text-on-surface focus:outline-none focus:border-primary-container">
+    <option value="">Select Team A</option>
+</select>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface mb-3">Team B (Away)</label>
+<select id="teamBSelect" class="w-full bg-surface-container border border-outline-variant rounded p-3 font-body-md text-on-surface focus:outline-none focus:border-primary-container">
+    <option value="">Select Team B</option>
+</select>
+</div>
+</div>
+
+<hr class="border-outline-variant opacity-50"/>
+
+<!-- Toss Winner & Decision -->
+<div class="space-y-6">
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface mb-3">Toss Winner</label>
+<select id="tossWinnerSelect" class="w-full bg-surface-container border border-outline-variant rounded p-3 font-body-md text-on-surface focus:outline-none focus:border-primary-container">
+    <option value="">Select Toss Winner</option>
+</select>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface mb-3">Toss Decision</label>
+<div class="grid grid-cols-2 gap-3">
+<button type="button" class="option-btn font-body-md text-body-md" data-group="toss_decision" data-value="bat">Bat</button>
+<button type="button" class="option-btn font-body-md text-body-md" data-group="toss_decision" data-value="field">Field</button>
+</div>
+</div>
+</div>
+<!-- Submit Action -->
+<div class="pt-6">
+<button id="predictBtn" class="w-full bg-primary text-on-primary py-4 px-6 font-label-caps text-label-caps uppercase tracking-wider hover:bg-primary-container transition-colors rounded disabled:opacity-50 disabled:cursor-not-allowed" type="button" disabled>
+                            Synthesize Prediction
+                        </button>
+</div>
+</form>
+</div>
+<!-- Right Column: Output / Analysis (The 'Story') -->
+<div class="lg:col-span-7 flex flex-col h-full mt-10 lg:mt-0">
+<!-- Visual Anchor Image for the Analysis -->
+<div class="w-full h-48 md:h-64 mb-8 rounded overflow-hidden relative border border-outline-variant">
+<img alt="cricket stadium at dusk" class="object-cover w-full h-full grayscale-[20%] opacity-90 mix-blend-multiply" data-alt="expansive view of an empty cricket stadium at dusk under a cloudy sky, dramatic moody lighting, deep greens and greys, sophisticated sports aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBE3u3BwM-ib8EYeoBT2IVIa-78xZfWCTmlYarzcoG2ZbmBZRBxrs2NR5AG97ZzH17FjYxmuJWOhXEHjg5-836HH4syqXh7Flbvyh44ap970xA0FHTyGDF94TDgsgZzoEU6IIALJO3R9n9FnZzcObnl32qjl7Gevb2gTo8WUfNeTOqWJTI8x47EN5OdCSE7K3uZmhOCYxOXnu9ijn1CBR_Ls_-y9XEUb1s1PEr25H_ut-AGaLBillsXq9JPf5qx6ffoTMgtYUT1Vf3v"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+<div class="pl-0 lg:pl-8 flex-grow">
+<!-- Probability Index Header -->
+<div class="mb-8">
+<p class="font-label-caps text-label-caps text-primary-container mb-2 uppercase tracking-widest border-l-2 border-primary-container pl-3">Calculated Outcome</p>
+<div class="flex items-baseline space-x-4">
+<span class="font-display-lg text-display-lg text-primary text-[72px] leading-none">65<span class="text-headline-md">%</span></span>
+<span class="font-headline-sm text-headline-sm text-on-surface-variant">Advantage: Team A</span>
+</div>
+</div>
+<!-- Journalistic AI Analysis -->
+<article class="prose max-w-none">
+<p class="font-body-lg text-body-lg text-on-surface mb-6 leading-relaxed first-letter:text-5xl first-letter:font-bold first-letter:text-primary first-letter:mr-2 first-letter:float-left">
+                            Given the synthesized parameters, the prevailing narrative strongly favors the home contingent. An <span class="font-semibold text-primary">overcast atmosphere</span> inherently lowers the ceiling for aggressive stroke-play, introducing a significant swing variable during the opening spells. Team A's historical proficiency in mitigating early lateral movement anchors their dominant 65% probability index.
+                        </p>
+<div class="bg-surface-container-low p-6 border-l-4 border-tertiary-container my-8">
+<h4 class="font-label-caps text-label-caps text-tertiary mb-2 uppercase tracking-widest">Key Statistical Pivot</h4>
+<p class="font-body-md text-body-md text-on-surface-variant italic">
+                                On <span class="font-semibold text-on-surface">Dry</span> pitches under overcast conditions, the variance in bounce tends to punish the structurally weaker batting lineup (Team B index: 68). Expect early collapse vectors if the ball remains newer than 15 overs.
+                            </p>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                            The algorithm suggests that while Team B possesses theoretical counter-attacking capabilities, the combination of a deteriorating dry surface and persistent humidity will likely restrict their ability to build substantial partnerships in the middle overs. The tactical imperative for Team A lies purely in sustained disciplined lengths.
+                        </p>
+</article>
+<!-- Minimal secondary actions -->
+<div class="mt-12 flex items-center space-x-6 border-t border-outline-variant pt-6">
+<button class="font-label-caps text-label-caps text-primary uppercase tracking-widest flex items-center hover:text-surface-tint transition-colors">
+<span class="material-symbols-outlined mr-2 text-[18px]" data-icon="download">download</span>
+                            Export Report
+                        </button>
+<button class="font-label-caps text-label-caps text-primary uppercase tracking-widest flex items-center hover:text-surface-tint transition-colors">
+<span class="material-symbols-outlined mr-2 text-[18px]" data-icon="share">share</span>
+                            Share Insights
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-[#F5F5DC] dark:bg-stone-900 full-width py-20 mt-20 border-t border-[#013220]/10 flat">
+<div class="max-w-[1280px] mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<div class="flex flex-col space-y-4">
+<span class="font-serif font-bold text-[#013220] text-xl">The Cricket Journal</span>
+<p class="font-serif text-sm italic text-[#013220] dark:text-emerald-500">
+                    © 2024 The Cricket Journal. Editorial Excellence in Sports Analytics.
+                </p>
+</div>
+<nav class="flex flex-wrap md:justify-end gap-x-8 gap-y-4">
+<a class="font-serif text-sm italic text-stone-600 dark:text-stone-400 hover:text-[#013220] dark:hover:text-emerald-300 transition-colors Standard link hover" href="#">Archives</a>
+<a class="font-serif text-sm italic text-stone-600 dark:text-stone-400 hover:text-[#013220] dark:hover:text-emerald-300 transition-colors Standard link hover" href="#">Methodology</a>
+<a class="font-serif text-sm italic text-stone-600 dark:text-stone-400 hover:text-[#013220] dark:hover:text-emerald-300 transition-colors Standard link hover" href="#">Privacy Policy</a>
+<a class="font-serif text-sm italic text-stone-600 dark:text-stone-400 hover:text-[#013220] dark:hover:text-emerald-300 transition-colors Standard link hover" href="#">Contact</a>
+</nav>
+</div>
+</footer>
+<script src="../js/theme-system.js"></script>
+<script src="../js/responsive-nav.js"></script>
+<script type="module" src="../js/ui-integration.js"></script>
+</body></html>

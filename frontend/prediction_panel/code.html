@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script>
+        (function () {
+            try {
+                var savedTheme = localStorage.getItem('cricpredic_theme') || 'test';
+                if (savedTheme === 'ipl') {
+                    document.documentElement.setAttribute('data-theme', 'ipl');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                }
+            } catch (e) {
+                document.documentElement.removeAttribute('data-theme');
+            }
+        })();
+    </script>
+<title>MatchPredictor - Prediction Engine</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="../css/theme-system.css" rel="stylesheet"/>
+<link href="../css/responsive-system.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&amp;family=Space+Grotesk:wght@600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#93000a",
+                        "tertiary": "#ffecad",
+                        "on-surface": "#e2e1ee",
+                        "primary-fixed-dim": "#00daf3",
+                        "primary": "#c3f5ff",
+                        "on-surface-variant": "#bac9cc",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#6f00be",
+                        "on-primary-fixed-variant": "#004f58",
+                        "inverse-primary": "#006875",
+                        "surface-container-high": "#282a32",
+                        "background": "#11131b",
+                        "on-background": "#e2e1ee",
+                        "surface-dim": "#11131b",
+                        "surface-container": "#1d1f28",
+                        "inverse-on-surface": "#2e3039",
+                        "surface-tint": "#00daf3",
+                        "surface-container-low": "#191b24",
+                        "on-primary": "#00363d",
+                        "primary-fixed": "#9cf0ff",
+                        "on-error": "#690005",
+                        "on-secondary": "#490080",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "surface-container-highest": "#33343e",
+                        "outline": "#849396",
+                        "on-tertiary": "#3a3000",
+                        "tertiary-fixed": "#ffe16d",
+                        "on-tertiary-fixed": "#221b00",
+                        "surface": "#11131b",
+                        "secondary": "#ddb7ff",
+                        "tertiary-container": "#f4ce00",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#6900b3",
+                        "secondary-fixed": "#f0dbff",
+                        "secondary-fixed-dim": "#ddb7ff",
+                        "inverse-surface": "#e2e1ee",
+                        "on-secondary-container": "#d6a9ff",
+                        "surface-container-lowest": "#0c0e16",
+                        "on-tertiary-container": "#695800",
+                        "on-secondary-fixed": "#2c0051",
+                        "surface-bright": "#373942",
+                        "surface-variant": "#33343e",
+                        "primary-container": "#00e5ff",
+                        "outline-variant": "#3b494c",
+                        "on-primary-fixed": "#001f24",
+                        "on-primary-container": "#00626e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "density": "tight",
+                        "margin": "24px",
+                        "gutter": "16px",
+                        "container-max": "1440px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Lexend"],
+                        "body-md": ["Lexend"],
+                        "headline-xl": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"],
+                        "label-sm": ["Lexend"],
+                        "data-mono": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "600" }],
+                        "data-mono": ["16px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen overflow-hidden flex font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar Shared Component -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-cyan-950/40 backdrop-blur-xl border-b border-white/10 shadow-[0_0_20px_rgba(0,229,255,0.15)]">
+<div class="text-2xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 font-headline-md tracking-tight">MatchPredictor</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="bg-surface-container-high/50 border border-outline-variant rounded-full py-1.5 pl-10 pr-4 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary-container/50 transition-colors w-64 placeholder:text-slate-500 shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)]" placeholder="Search teams, players..." type="text"/>
+</div>
+<button class="text-slate-400 hover:text-cyan-300 transition-colors opacity-80 hover:opacity-100 hover:scale-95 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications</span>
+</button>
+<button class="text-slate-400 hover:text-cyan-300 transition-colors opacity-80 hover:opacity-100 hover:scale-95 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</button>
+</div>
+</header>
+<!-- SideNavBar Shared Component -->
+<nav class="hidden md:flex fixed left-0 top-16 h-[calc(100vh-64px)] w-64 z-40 flex-col py-8 bg-slate-950/60 backdrop-blur-2xl border-r border-white/10 shadow-[10px_0_30px_rgba(0,0,0,0.5)]">
+<div class="px-6 mb-8 flex items-center gap-4">
+<div class="relative">
+<img alt="User Profile" class="w-12 h-12 rounded-full border-2 border-primary-container/50 object-cover" data-alt="Futuristic glowing avatar profile picture of a sports analyst with neon cyan ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8jqdnz6mXUufRhVsZYF6GJBz2r6oQIa8PykUfsbNJvrDS2NVLG_IA3VGps-ieyYw_WmrMoMQvgVzCMR16QG7d-imMI4TpTJ41tftQZQSjc2ABIEjOPcT84qcbb7ezlyGIKkUPK_h9bD7M_IuiQVTkKh0ak1kZa6Ljwur9o91tEvdH2tjsOju7fKiRq96ia1WSLULSXFDy721hIBf_ShnBHPL-VBSUItNdduXePrp3rsvGzkSJrND6EKlAWUPypM-fXG_JNlMTBRzt"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-tertiary-container rounded-full border-2 border-background shadow-[0_0_10px_rgba(244,206,0,0.8)]"></div>
+</div>
+<div>
+<div class="font-headline-md text-body-lg text-on-surface leading-tight">Pro Analyst</div>
+<div class="font-body-md text-label-sm text-tertiary-container tracking-wide">Premium Tier</div>
+</div>
+</div>
+<ul class="flex-1 space-y-2 px-4">
+<li><a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-all duration-300 font-headline-md text-sm font-bold uppercase tracking-widest" href="#"><span class="material-symbols-outlined">dashboard</span> Dashboard</a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-cyan-500/10 text-cyan-400 border-r-4 border-cyan-400 shadow-[inset_0_0_15px_rgba(0,229,255,0.2)] font-headline-md text-sm font-bold uppercase tracking-widest translate-x-1" href="#"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">query_stats</span> Predict</a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-all duration-300 font-headline-md text-sm font-bold uppercase tracking-widest" href="#"><span class="material-symbols-outlined">analytics</span> Analytics</a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-all duration-300 font-headline-md text-sm font-bold uppercase tracking-widest" href="#"><span class="material-symbols-outlined">history</span> History</a></li>
+</ul>
+<div class="px-4 mt-auto space-y-4">
+<button class="w-full py-3 rounded-lg bg-gradient-to-r from-tertiary-container to-tertiary-fixed text-on-tertiary-container font-headline-md text-body-md shadow-[0_0_20px_rgba(244,206,0,0.2)] hover:opacity-90 transition-opacity">Upgrade to VIP</button>
+<div class="pt-4 border-t border-white/10 space-y-2">
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-all duration-300 font-headline-md text-sm font-bold uppercase tracking-widest" href="#"><span class="material-symbols-outlined text-[20px]">settings</span> Settings</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-all duration-300 font-headline-md text-sm font-bold uppercase tracking-widest" href="#"><span class="material-symbols-outlined text-[20px]">help</span> Support</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 mt-16 p-6 h-[calc(100vh-64px)] overflow-y-auto custom-scrollbar relative">
+<!-- Ambient background glow -->
+<div class="absolute top-0 left-1/4 w-96 h-96 bg-primary-container/10 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+<div class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary-container/10 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+<div class="max-w-container-max mx-auto space-y-6">
+<!-- Page Header -->
+<div class="flex items-end justify-between border-b border-outline-variant/30 pb-4">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Prediction <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-container to-secondary">Engine</span></h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Configure match variables to generate algorithmic outcome probabilities.</p>
+</div>
+<div class="hidden lg:flex items-center gap-2 bg-surface-container/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
+<span class="w-2 h-2 rounded-full bg-error shadow-[0_0_10px_rgba(255,180,171,0.8)] animate-pulse"></span>
+<span class="font-data-mono text-label-sm text-error uppercase tracking-widest">Live Model Ready</span>
+</div>
+</div>
+<!-- Main Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Team Selectors (Spans full width) -->
+<div class="lg:col-span-12 bg-surface-container/40 backdrop-blur-xl border-t border-l border-white/10 border-r border-b border-black/40 rounded-xl p-6 shadow-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-container/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-primary-container">swords</span> Matchup Selection</h2>
+<div class="flex flex-col md:flex-row items-center justify-between gap-8">
+<!-- Team A -->
+<div class="flex-1 w-full bg-surface-container-high/50 border border-outline-variant/50 hover:border-primary-container/50 transition-colors rounded-xl p-4 flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest border-2 border-primary/30 flex items-center justify-center overflow-hidden">
+<img alt="Team A Logo" class="w-full h-full object-cover opacity-80 mix-blend-screen" data-alt="Abstract metallic blue sports team logo on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsBU5DDZ7kDpw-fQF4EH75Lz1w0rBhk0i8By_QHAnggOVsWxfTu7_EOPZFRUU6mk1pSDV1R2UrTAYsuMx0bDS5z6XyzwXIQt9ROLHtxg4g5KnBFxVTdcBU8PpmIt8AZvAjM4NXBlaoD_pO2IERV5Q4qrZwJGM7uaefgCJd4h1LyccOfUHonyFge7uNwSIVFBVC1zQecL8ONQwO4Zk_8-x9yZBF5GJNgngQHvIKgmP8k4zblSZMzXqdTIU7Y0ujEkxQeVL1ZpN-C0-_"/>
+</div>
+<div>
+<div class="font-body-md text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Home Team</div>
+<div class="font-headline-md text-body-lg text-on-surface group-hover:text-primary-container transition-colors">Mumbai Titans</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary-container transition-colors">expand_more</span>
+</div>
+<!-- VS Badge -->
+<div class="flex-shrink-0 relative">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest border border-outline-variant/50 flex items-center justify-center z-10 relative shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+<span class="font-headline-md text-body-lg text-tertiary-container italic font-black">VS</span>
+</div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-tertiary-container/20 blur-md pointer-events-none"></div>
+</div>
+<!-- Team B -->
+<div class="flex-1 w-full bg-surface-container-high/50 border border-outline-variant/50 hover:border-secondary/50 transition-colors rounded-xl p-4 flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest border-2 border-secondary/30 flex items-center justify-center overflow-hidden">
+<img alt="Team B Logo" class="w-full h-full object-cover opacity-80 mix-blend-screen" data-alt="Abstract fiery red and gold sports team logo on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQWkoq0j5qF5tJ8_rJttEMv04OtMdayH3iSPykT0wlVpoKyBHkXoKxHPberwWUxG6HoEp52-7QePLRhg3ylyYS0GnMXydX9Wf5VkrjZXuEhgcE9Vnhpj9kD14oK8G1ZwkXOoUkOZ4kmXsaskLpTyqwXwRE0k3RqJe7dc8dkHow2D1FUNDmiSWyZpCiqBmAeLGc2H0rOb9dG6YcB2ozlSxptQr3p0OWi4LVXQDwn5GTWchESYlgmgaGv40CGih_yf9iRainnV0lmbA7"/>
+</div>
+<div>
+<div class="font-body-md text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Away Team</div>
+<div class="font-headline-md text-body-lg text-on-surface group-hover:text-secondary transition-colors">Chennai Kings</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-secondary transition-colors">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Input Variables (Left Column) -->
+<div class="lg:col-span-8 bg-surface-container/40 backdrop-blur-xl border-t border-l border-white/10 border-r border-b border-black/40 rounded-xl p-6 shadow-xl flex flex-col justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-8 flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-container">tune</span> Simulation Parameters</h2>
+<div class="space-y-8 flex-1">
+<!-- Pitch Slider -->
+<div>
+<div class="flex justify-between items-end mb-3">
+<label class="font-body-md text-body-lg text-on-surface">Pitch Condition</label>
+<span class="font-data-mono text-data-mono text-primary-container">Pace Favored</span>
+</div>
+<div class="relative h-4 bg-surface-container-highest rounded-full border border-white/5 overflow-hidden shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">
+<!-- Track Fill -->
+<div class="absolute top-0 left-0 h-full w-[75%] bg-gradient-to-r from-primary/20 to-primary-container rounded-full"></div>
+<!-- Thumb -->
+<div class="absolute top-1/2 left-[75%] -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-surface-bright rounded-full border-2 border-primary-container shadow-[0_0_15px_rgba(0,229,255,0.8)] cursor-pointer"></div>
+</div>
+<div class="flex justify-between mt-2 font-body-md text-label-sm text-on-surface-variant uppercase tracking-wider">
+<span>Spin / Dusty</span>
+<span>Flat / Pace</span>
+</div>
+</div>
+<!-- Weather Slider -->
+<div>
+<div class="flex justify-between items-end mb-3">
+<label class="font-body-md text-body-lg text-on-surface">Weather Impact</label>
+<span class="font-data-mono text-data-mono text-secondary">Overcast (Swing)</span>
+</div>
+<div class="relative h-4 bg-surface-container-highest rounded-full border border-white/5 overflow-hidden shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">
+<!-- Track Fill -->
+<div class="absolute top-0 left-0 h-full w-[30%] bg-gradient-to-r from-secondary/20 to-secondary-container rounded-full"></div>
+<!-- Thumb -->
+<div class="absolute top-1/2 left-[30%] -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-surface-bright rounded-full border-2 border-secondary shadow-[0_0_15px_rgba(221,183,255,0.6)] cursor-pointer"></div>
+</div>
+<div class="flex justify-between mt-2 font-body-md text-label-sm text-on-surface-variant uppercase tracking-wider">
+<span>Heavy Cloud</span>
+<span>Clear / Dry</span>
+</div>
+</div>
+<!-- Toss Toggle -->
+<div>
+<label class="font-body-md text-body-lg text-on-surface block mb-3">Assumed Toss Winner</label>
+<div class="flex bg-surface-container-highest p-1 rounded-lg border border-outline-variant/30">
+<button class="flex-1 py-2 rounded-md bg-surface-container border border-primary-container/50 shadow-[0_0_15px_rgba(0,229,255,0.15)] text-primary-container font-headline-md text-body-md transition-all">Mumbai</button>
+<button class="flex-1 py-2 rounded-md text-on-surface-variant hover:text-on-surface font-headline-md text-body-md transition-all">Chennai</button>
+</div>
+</div>
+</div>
+<!-- Primary Action Button -->
+<div class="mt-8 pt-6 border-t border-white/5">
+<button class="w-full relative group overflow-hidden rounded-xl bg-surface-container-high border border-tertiary-container/50 py-4 px-6 flex items-center justify-center gap-3 transition-all duration-300 hover:border-tertiary-container hover:shadow-[0_0_30px_rgba(244,206,0,0.3)]">
+<div class="absolute inset-0 bg-gradient-to-r from-tertiary-container/10 via-tertiary-container/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+<span class="material-symbols-outlined text-tertiary-container group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">psychiatry</span>
+<span class="font-headline-md text-headline-md text-tertiary-container tracking-wide">Execute Prediction Model</span>
+</button>
+</div>
+</div>
+<!-- Output Section (Right Column) -->
+<div class="lg:col-span-4 bg-surface-container/40 backdrop-blur-xl border-t border-l border-white/10 border-r border-b border-black/40 rounded-xl p-6 shadow-xl flex flex-col items-center justify-center relative overflow-hidden min-h-[400px]">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary-container/10 rounded-full blur-[60px] pointer-events-none"></div>
+<div class="w-full flex justify-between items-start absolute top-6 left-0 px-6">
+<span class="font-headline-md text-body-md text-on-surface-variant uppercase tracking-widest">Live Output</span>
+<span class="material-symbols-outlined text-primary-container animate-pulse">sensors</span>
+</div>
+<!-- Circular Graph (CSS Conic Gradient trick) -->
+<div class="relative w-56 h-56 mt-8">
+<!-- Background track -->
+<div class="absolute inset-0 rounded-full bg-surface-container-highest shadow-[inset_0_5px_15px_rgba(0,0,0,0.5)] border border-white/5"></div>
+<!-- Progress Gradient (approx 68%) -->
+<div class="absolute inset-0 rounded-full" style="background: conic-gradient(theme('colors.primary-container') 0%, theme('colors.primary-fixed-dim') 68%, transparent 68%); mask-image: radial-gradient(transparent 55%, black 56%); -webkit-mask-image: radial-gradient(transparent 55%, black 56%);"></div>
+<!-- Glow effect for progress -->
+<div class="absolute inset-0 rounded-full opacity-50 blur-sm" style="background: conic-gradient(theme('colors.primary-container') 0%, theme('colors.primary-fixed-dim') 68%, transparent 68%); mask-image: radial-gradient(transparent 55%, black 56%); -webkit-mask-image: radial-gradient(transparent 55%, black 56%);"></div>
+<!-- Inner Content -->
+<div class="absolute inset-0 flex flex-col items-center justify-center z-10">
+<span class="font-data-mono text-headline-xl text-on-surface shadow-black drop-shadow-lg">68<span class="text-headline-md text-primary-container">%</span></span>
+<span class="font-headline-md text-label-sm text-primary-container uppercase tracking-widest mt-1">Mumbai Win</span>
+</div>
+</div>
+<div class="mt-8 text-center w-full">
+<div class="bg-surface-container-highest/80 border border-white/5 rounded-lg py-3 px-4 backdrop-blur-sm flex justify-between items-center">
+<span class="font-body-md text-label-sm text-on-surface-variant uppercase tracking-wider">Model Confidence</span>
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-body-md text-tertiary-container">High (92%)</span>
+<span class="material-symbols-outlined text-tertiary-container text-[18px]">verified</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Key Factors (Spans full width below) -->
+<div class="lg:col-span-12 bg-surface-container/40 backdrop-blur-xl border-t border-l border-white/10 border-r border-b border-black/40 rounded-xl p-6 shadow-xl">
+<h3 class="font-headline-md text-body-lg text-on-surface mb-4">Algorithmic Weight Factors</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Factor 1 -->
+<div class="bg-surface-container-highest/50 border border-outline-variant/30 rounded-lg p-4 flex items-start gap-4 hover:bg-surface-container-highest transition-colors">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center flex-shrink-0 border border-primary-container/20 text-primary-container">
+<span class="material-symbols-outlined">stadium</span>
+</div>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface">Pitch Suitability</h4>
+<p class="font-body-md text-label-sm text-on-surface-variant mt-1">Current surface heavily favors Mumbai's pace attack.</p>
+<div class="mt-2 inline-flex items-center gap-1 text-primary-container font-data-mono text-label-sm bg-primary-container/10 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +14% Impact
+                                </div>
+</div>
+</div>
+<!-- Factor 2 -->
+<div class="bg-surface-container-highest/50 border border-outline-variant/30 rounded-lg p-4 flex items-start gap-4 hover:bg-surface-container-highest transition-colors">
+<div class="w-10 h-10 rounded-full bg-error/10 flex items-center justify-center flex-shrink-0 border border-error/20 text-error">
+<span class="material-symbols-outlined">person_off</span>
+</div>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface">Key Player Absence</h4>
+<p class="font-body-md text-label-sm text-on-surface-variant mt-1">Chennai missing lead spinner due to injury.</p>
+<div class="mt-2 inline-flex items-center gap-1 text-error font-data-mono text-label-sm bg-error/10 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]">trending_down</span> -8% Impact
+                                </div>
+</div>
+</div>
+<!-- Factor 3 -->
+<div class="bg-surface-container-highest/50 border border-outline-variant/30 rounded-lg p-4 flex items-start gap-4 hover:bg-surface-container-highest transition-colors">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center flex-shrink-0 border border-secondary/20 text-secondary">
+<span class="material-symbols-outlined">history</span>
+</div>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface">Historical H2H</h4>
+<p class="font-body-md text-label-sm text-on-surface-variant mt-1">Mumbai has won 4 of last 5 at this venue.</p>
+<div class="mt-2 inline-flex items-center gap-1 text-secondary font-data-mono text-label-sm bg-secondary/10 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +6% Impact
+                                </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script src="../js/theme-system.js"></script>
+<script src="../js/responsive-nav.js"></script>
+<script type="module" src="../js/ui-integration.js"></script>
+</body></html>

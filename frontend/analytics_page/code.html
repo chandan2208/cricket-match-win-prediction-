@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script>
+            (function () {
+                try {
+                    var savedTheme = localStorage.getItem('cricpredic_theme') || 'test';
+                    if (savedTheme === 'ipl') {
+                        document.documentElement.setAttribute('data-theme', 'ipl');
+                    } else {
+                        document.documentElement.removeAttribute('data-theme');
+                    }
+                } catch (e) {
+                    document.documentElement.removeAttribute('data-theme');
+                }
+            })();
+        </script>
+<title>MatchPredictor Analytics</title>
+<!-- Google Fonts -->
+<link href="../css/theme-system.css" rel="stylesheet"/>
+<link href="../css/responsive-system.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&amp;family=Space+Grotesk:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error-container": "#93000a",
+                    "tertiary": "#ffecad",
+                    "on-surface": "#e2e1ee",
+                    "primary-fixed-dim": "#00daf3",
+                    "primary": "#c3f5ff",
+                    "on-surface-variant": "#bac9cc",
+                    "error": "#ffb4ab",
+                    "secondary-container": "#6f00be",
+                    "on-primary-fixed-variant": "#004f58",
+                    "inverse-primary": "#006875",
+                    "surface-container-high": "#282a32",
+                    "background": "#11131b",
+                    "on-background": "#e2e1ee",
+                    "surface-dim": "#11131b",
+                    "surface-container": "#1d1f28",
+                    "inverse-on-surface": "#2e3039",
+                    "surface-tint": "#00daf3",
+                    "surface-container-low": "#191b24",
+                    "on-primary": "#00363d",
+                    "primary-fixed": "#9cf0ff",
+                    "on-error": "#690005",
+                    "on-secondary": "#490080",
+                    "on-tertiary-fixed-variant": "#544600",
+                    "tertiary-fixed-dim": "#e9c400",
+                    "surface-container-highest": "#33343e",
+                    "outline": "#849396",
+                    "on-tertiary": "#3a3000",
+                    "tertiary-fixed": "#ffe16d",
+                    "on-tertiary-fixed": "#221b00",
+                    "surface": "#11131b",
+                    "secondary": "#ddb7ff",
+                    "tertiary-container": "#f4ce00",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#6900b3",
+                    "secondary-fixed": "#f0dbff",
+                    "secondary-fixed-dim": "#ddb7ff",
+                    "inverse-surface": "#e2e1ee",
+                    "on-secondary-container": "#d6a9ff",
+                    "surface-container-lowest": "#0c0e16",
+                    "on-tertiary-container": "#695800",
+                    "on-secondary-fixed": "#2c0051",
+                    "surface-bright": "#373942",
+                    "surface-variant": "#33343e",
+                    "primary-container": "#00e5ff",
+                    "outline-variant": "#3b494c",
+                    "on-primary-fixed": "#001f24",
+                    "on-primary-container": "#00626e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "density": "tight",
+                    "margin": "24px",
+                    "gutter": "16px",
+                    "container-max": "1440px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Lexend"],
+                    "body-md": ["Lexend"],
+                    "headline-xl": ["Space Grotesk"],
+                    "headline-md": ["Space Grotesk"],
+                    "label-sm": ["Lexend"],
+                    "data-mono": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "fontWeight": "600"}],
+                    "data-mono": ["16px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .glass-panel {
+            background-color: rgba(29, 31, 40, 0.5); /* surface-container with opacity */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top-color: rgba(255, 255, 255, 0.1);
+            border-left-color: rgba(255, 255, 255, 0.1);
+        }
+        .neon-glow {
+            filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.6));
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-cyan-950/40 backdrop-blur-xl border-b border-white/10 shadow-[0_0_20px_rgba(0,229,255,0.15)] font-space-grotesk tracking-tight">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">MatchPredictor</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="bg-surface-container-high/50 border border-white/5 rounded-full py-1.5 pl-9 pr-4 text-sm text-on-surface placeholder:text-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all w-64" placeholder="Search matches, players..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-400 hover:text-cyan-300 transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full shadow-[0_0_8px_rgba(255,180,171,0.8)]"></span>
+</button>
+<button class="text-slate-400 hover:text-cyan-300 transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 z-40 flex flex-col py-8 bg-slate-950/60 backdrop-blur-2xl border-r border-white/10 shadow-[10px_0_30px_rgba(0,0,0,0.5)]">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-secondary-container flex items-center justify-center p-0.5">
+<div class="w-full h-full bg-surface rounded-full flex items-center justify-center overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="professional headshot of a male sports analyst in a dark studio setting with cool rim lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCukVnco7EX3D8fclGeGNplewt8UTvOxWP30NFANK7mStlXBapo5UgJoq00IbtlF4J3WQpLd7NhArBpf8ZKJiDIphrqSwcBVeMY-jVhEHBELg2O8jTK0g_V9pUbP7oVKi3VPw5O9WHh3BGWprRQ1QnEl7S50Da0ckB1LoekyF2bM_iqTKnDdIviQL8Z4d4ejfmhcyTzL3sdFmdnF3yT1PLRev5UqK8TxfMTS_H2MwYKZcLaNWqsDb60oymEsbTkPK7Q55WcSitUgFrG"/>
+</div>
+</div>
+<div>
+<div class="font-data-mono text-data-mono text-on-surface">Pro Analyst</div>
+<div class="font-label-sm text-label-sm text-primary-container">Premium Tier</div>
+</div>
+</div>
+<ul class="flex flex-col gap-2 px-3 flex-grow">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-all duration-300 font-space-grotesk text-sm font-bold uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-all duration-300 font-space-grotesk text-sm font-bold uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">query_stats</span>
+                    Predict
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-cyan-500/10 text-cyan-400 border-r-4 border-cyan-400 shadow-[inset_0_0_15px_rgba(0,229,255,0.2)] font-space-grotesk text-sm font-bold uppercase tracking-widest translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+                    Analytics
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-all duration-300 font-space-grotesk text-sm font-bold uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined">history</span>
+                    History
+                </a>
+</li>
+</ul>
+<div class="px-6 mt-auto mb-6">
+<button class="w-full py-2.5 rounded border border-secondary-container text-secondary text-sm font-bold uppercase tracking-wider hover:bg-secondary-container/20 transition-colors shadow-[0_0_15px_rgba(111,0,190,0.3)]">
+                Upgrade to VIP
+            </button>
+</div>
+<ul class="flex flex-col gap-1 px-3 border-t border-white/5 pt-4">
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-all duration-300 font-space-grotesk text-sm font-bold uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm">settings</span>
+                    Settings
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-all duration-300 font-space-grotesk text-sm font-bold uppercase tracking-widest" href="#">
+<span class="material-symbols-outlined text-sm">help</span>
+                    Support
+                </a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-64 mt-16 p-margin min-h-screen">
+<!-- Page Header -->
+<div class="flex items-end justify-between mb-margin">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-2 flex items-center gap-4">
+                    Match Analysis
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-error-container/20 border border-error-container/50 text-error font-label-sm text-label-sm uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse shadow-[0_0_8px_rgba(255,180,171,0.8)]"></span>
+                        LIVE
+                    </span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">IND vs AUS • 2nd T20I • Over 14.2</p>
+</div>
+<div class="flex gap-4">
+<div class="glass-panel px-4 py-2 rounded-lg flex items-center gap-3">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Current Proj.</span>
+<span class="font-data-mono text-headline-md text-primary-container neon-glow">184</span>
+</div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Win Probability Line Chart (Full Width) -->
+<div class="col-span-12 glass-panel rounded-xl p-6 relative">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">ssid_chart</span>
+                        Win Probability Dynamics
+                    </h2>
+<div class="flex gap-4 font-label-sm text-label-sm">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary-container shadow-[0_0_8px_rgba(0,229,255,0.6)]"></span>
+<span class="text-on-surface">India (Batting)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary-container shadow-[0_0_8px_rgba(111,0,190,0.6)]"></span>
+<span class="text-on-surface-variant">Australia</span>
+</div>
+</div>
+</div>
+<div class="h-[250px] w-full relative">
+<canvas aria-label="Win probability chart" id="winProbabilityChart" role="img"></canvas>
+</div>
+</div>
+<!-- Player Impact Score (Vertical Bar Chart) -->
+<div class="col-span-12 lg:col-span-6 glass-panel rounded-xl p-6">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">bolt</span>
+                    Player Impact Score
+                </h2>
+<div class="h-[260px]">
+<canvas aria-label="Player impact chart" id="playerImpactChart" role="img"></canvas>
+</div>
+</div>
+<!-- Team Attribute Comparison (Radar Chart Mock) -->
+<div class="col-span-12 lg:col-span-6 glass-panel rounded-xl p-6 relative min-h-[340px] flex flex-col">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary">radar</span>
+                    Matchup Profiles
+                </h2>
+<div class="flex-grow relative mt-4 h-[260px]">
+<canvas aria-label="Matchup radar chart" id="matchupRadarChart" role="img"></canvas>
+</div>
+</div>
+</div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script src="../js/analytics-charts.js"></script>
+<script src="../js/theme-system.js"></script>
+<script src="../js/responsive-nav.js"></script>
+<script type="module" src="../js/ui-integration.js"></script>
+</body></html>
